@@ -12,6 +12,7 @@ interface ProjectCardProps {
   githubUrl?: string;
   liveUrl?: string;
   slug: string;
+  isActive?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -22,23 +23,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   githubUrl,
   liveUrl,
   slug,
+  isActive = false,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
     <div
       className={cn(
-        "relative group rounded-xl overflow-hidden border border-border bg-card transition-all duration-300 h-full",
-        isHovered ? "shadow-lg transform -translate-y-1" : "shadow-md"
+        "relative group rounded-xl overflow-hidden border transition-all duration-500 h-full",
+        isActive ? "border-primary shadow-lg border-opacity-70" : "border-border shadow-md",
+        isHovered && isActive ? "transform -translate-y-2" : ""
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Border glow effect on hover */}
+      {/* Border glow effect on hover or when active */}
       <div
         className={cn(
           "absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 pointer-events-none",
-          isHovered ? "opacity-100" : ""
+          (isHovered || isActive) ? "opacity-100" : ""
         )}
         style={{
           background: "linear-gradient(45deg, rgba(155,135,245,0.5), rgba(217,70,239,0.5), rgba(30,174,219,0.5))",
@@ -56,15 +59,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             alt={title}
             className={cn(
               "w-full h-full object-cover transition-transform duration-700",
-              isHovered ? "scale-105" : ""
+              (isHovered || isActive) ? "scale-105" : ""
             )}
           />
         </div>
       )}
       
       {/* Content section */}
-      <div className="p-5">
-        <h3 className="font-serif text-xl font-medium mb-2 glow-text">{title}</h3>
+      <div className="p-5 bg-card">
+        <h3 className={cn(
+          "font-serif text-xl font-medium mb-2",
+          isActive ? "glow-text" : ""
+        )}>{title}</h3>
         <p className="text-foreground/80 text-sm mb-4 line-clamp-2">{description}</p>
         
         {/* Tags */}
@@ -72,7 +78,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="text-xs px-2 py-1 rounded-full bg-accent/50 text-foreground/90"
+              className={cn(
+                "text-xs px-2 py-1 rounded-full transition-colors",
+                isActive 
+                  ? "bg-primary/30 text-foreground" 
+                  : "bg-accent/50 text-foreground/90"
+              )}
             >
               {tag}
             </span>

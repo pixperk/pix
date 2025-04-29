@@ -90,8 +90,13 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -138,4 +143,34 @@
       background-position: 100% 100%;
     }
   }
+  
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0);
+    }
+    50% { 
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* Define additional prose styles for Markdown content */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-serif;
+}
+
+.prose pre {
+  @apply bg-secondary/70 border border-border rounded-lg p-4 overflow-x-auto;
+}
+
+.prose code {
+  @apply bg-secondary/50 px-1 py-0.5 rounded text-foreground/90;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary/40 pl-4 italic;
+}
+
+.prose a {
+  @apply text-primary underline decoration-primary/30 hover:decoration-primary;
 }
