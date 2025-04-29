@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import GlowButton from "./GlowButton";
 
@@ -10,6 +11,7 @@ interface ProjectCardProps {
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
+  slug: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -19,6 +21,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   tags,
   githubUrl,
   liveUrl,
+  slug,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -66,7 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
+          {tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
               className="text-xs px-2 py-1 rounded-full bg-accent/50 text-foreground/90"
@@ -74,10 +77,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               {tag}
             </span>
           ))}
+          {tags.length > 3 && (
+            <span className="text-xs px-2 py-1 rounded-full bg-accent/20 text-foreground/60">
+              +{tags.length - 3}
+            </span>
+          )}
         </div>
         
         {/* Buttons */}
         <div className="flex gap-3 mt-auto">
+          <GlowButton
+            to={`/projects/${slug}`}
+            className="text-sm px-3 py-1 h-auto"
+          >
+            View Details
+          </GlowButton>
           {githubUrl && (
             <GlowButton
               variant="ghost"
@@ -86,15 +100,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               className="text-sm px-3 py-1 h-auto"
             >
               GitHub
-            </GlowButton>
-          )}
-          {liveUrl && (
-            <GlowButton
-              isExternal
-              to={liveUrl}
-              className="text-sm px-3 py-1 h-auto"
-            >
-              Live Demo
             </GlowButton>
           )}
         </div>
