@@ -14,7 +14,9 @@ const Layout = () => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100); // Small timeout to ensure DOM is ready
       }
     } else if (location.pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });

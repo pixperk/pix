@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import ProjectCard from "./ProjectCard";
 import { cn } from "@/lib/utils";
-import { useEmblaCarousel } from "embla-carousel-react";
+import * as emblaCarouselReact from "embla-carousel-react";
 
 // Sample projects data moved to a separate file
 
@@ -38,7 +38,7 @@ interface ProjectSliderProps {
 
 const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects, filter }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = emblaCarouselReact.useEmblaCarousel({ 
     loop: true,
     align: "center"
   });

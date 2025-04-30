@@ -5,6 +5,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import TechStack from "@/components/TechStack";
 
 const Home = () => {
   return (
@@ -190,7 +191,5 @@ const About = () => {
     </div>
   );
 };
-
-// Education & Skills will go in the About page
 
 export default Home;
