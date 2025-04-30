@@ -1,6 +1,6 @@
 
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Github, ExternalLink, ArrowRight, Code, Wrench, Bulb, Rocket } from "lucide-react";
+import { ArrowLeft, Github, ExternalLink, ArrowRight, Code, Wrench, Rocket } from "lucide-react";
 import GlowButton from "@/components/GlowButton";
 import { getProjectBySlug } from "@/data/projects";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -215,7 +215,7 @@ These challenges ultimately led to valuable learnings in system design, performa
         )}
       >
         <div className="flex items-center mb-6">
-          <Bulb className="h-6 w-6 mr-3 text-primary" />
+          <Rocket className="h-6 w-6 mr-3 text-primary" />
           <h2 className="font-serif text-3xl">Final Thoughts & Future Plans</h2>
         </div>
         
@@ -259,3 +259,4 @@ Looking back, this project represents not just technical achievement, but also v
 };
 
 export default ProjectDetail;
+
