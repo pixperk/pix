@@ -1,5 +1,6 @@
 
 import AnimatedHeading from "@/components/AnimatedHeading";
+import TechStack from "@/components/TechStack";
 
 const About = () => {
   return (

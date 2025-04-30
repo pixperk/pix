@@ -2,7 +2,6 @@
 import { ArrowRight, ArrowDown } from "lucide-react";
 import GlowButton from "@/components/GlowButton";
 import AnimatedHeading from "@/components/AnimatedHeading";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import TechStack from "@/components/TechStack";
@@ -12,17 +11,6 @@ const Home = () => {
     <div className="flex flex-col">
       {/* Full-height hero section */}
       <div className="flex flex-col justify-center items-center min-h-[calc(100vh-8rem)] py-12 relative">
-        <div className="flex flex-col items-center mb-10">
-          <Avatar className={cn(
-            "w-28 h-28 md:w-32 md:h-32 mb-8 ring-4 ring-primary/20",
-            "transition-all duration-500 hover:ring-primary/40",
-            "animate-float shadow-xl"
-          )}>
-            <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=300&q=90" alt="Profile" />
-            <AvatarFallback className="bg-primary/10 text-primary text-4xl font-serif">YM</AvatarFallback>
-          </Avatar>
-        </div>
-
         <div className="animate-fade-in opacity-0 text-center" style={{ animationDelay: '0.3s' }}>
           <AnimatedHeading className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight max-w-4xl mx-auto">
             Hey, I'm Yashaswi Mishra — aka Pixperk.

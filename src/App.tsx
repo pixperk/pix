@@ -15,6 +15,7 @@ import BlogPost from "./pages/BlogPost";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Cli from "./pages/Cli";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="resume" element={<Resume />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="cli" element={<Cli />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
