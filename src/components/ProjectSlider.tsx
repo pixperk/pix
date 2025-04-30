@@ -38,7 +38,7 @@ interface ProjectSliderProps {
 
 const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects, filter }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [emblaRef, emblaApi] = emblaCarouselReact.useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = emblaCarouselReact.default({ 
     loop: true,
     align: "center"
   });

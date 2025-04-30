@@ -6,6 +6,7 @@ export interface BlogPost {
   excerpt: string;
   tags: string[];
   content?: string;
+  coverImage?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -15,6 +16,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 25, 2025",
     excerpt: "Insights from building and scaling distributed systems in production, with lessons on fault tolerance and eventual consistency.",
     tags: ["Backend", "Architecture", "Rust", "Distributed Systems"],
+    coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=630&q=80",
     content: `
 # Building Resilient Distributed Systems: Lessons Learned
 
@@ -96,6 +98,7 @@ Remember: a distributed system is doing its job correctly when it manages to pro
     date: "April 18, 2025",
     excerpt: "How to leverage functional programming concepts in TypeScript to write cleaner, more maintainable code.",
     tags: ["TypeScript", "Functional Programming", "Frontend"],
+    coverImage: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1200&h=630&q=80",
     content: `
 # Functional Programming Patterns in TypeScript
 
@@ -242,6 +245,7 @@ The beauty of TypeScript is that it supports multiple paradigms, allowing you to
     date: "April 10, 2025",
     excerpt: "Exploring how MDX combines the simplicity of Markdown with the power of React components for better technical documentation.",
     tags: ["MDX", "Documentation", "React", "Frontend"],
+    coverImage: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1200&h=630&q=80",
     content: `
 # Why MDX is Perfect for Technical Documentation
 
@@ -395,6 +399,7 @@ If you're maintaining documentation, tutorials, or a technical blog, give MDX a 
     date: "April 3, 2025",
     excerpt: "A deep dive into event-driven architecture patterns and how they can help build more scalable and maintainable systems.",
     tags: ["Architecture", "Backend", "Kafka", "Microservices"],
+    coverImage: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1200&h=630&q=80",
     content: `
 # Building Scalable Systems with Event-Driven Architecture
 
@@ -590,5 +595,25 @@ export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
 export const getRecentPosts = (count: number = 3): BlogPost[] => {
   return [...blogPosts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, count);
+};
+
+export const getRelatedPosts = (slug: string, count: number = 2): BlogPost[] => {
+  const currentPost = getBlogPostBySlug(slug);
+  
+  if (!currentPost) return [];
+  
+  // Find posts with matching tags
+  return blogPosts
+    .filter(post => 
+      post.slug !== slug && // Not the current post
+      post.tags.some(tag => currentPost.tags.includes(tag)) // Has at least one matching tag
+    )
+    .sort((a, b) => {
+      // Sort by number of matching tags (descending)
+      const aMatches = a.tags.filter(tag => currentPost.tags.includes(tag)).length;
+      const bMatches = b.tags.filter(tag => currentPost.tags.includes(tag)).length;
+      return bMatches - aMatches;
+    })
     .slice(0, count);
 };

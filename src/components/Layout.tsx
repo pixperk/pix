@@ -18,7 +18,7 @@ const Layout = () => {
           element.scrollIntoView({ behavior: "smooth" });
         }, 100); // Small timeout to ensure DOM is ready
       }
-    } else if (location.pathname === "/") {
+    } else if (location.pathname === "/" && !location.hash) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location]);
