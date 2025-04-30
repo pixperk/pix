@@ -178,12 +178,19 @@
 /* Hide scrollbars for terminal components but retain functionality */
 .terminal-scrollbar::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
   background: transparent;
 }
 
 .terminal-scrollbar {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Enhanced terminal scrolling */
+.terminal-content {
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(to bottom, transparent, black 10px, black calc(100% - 10px), transparent);
 }
 
 /* Ensure page content is properly visible by fixing any overlap issues */

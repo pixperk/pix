@@ -12,12 +12,14 @@ const Home = () => {
     <div className="flex flex-col">
       {/* Full-height hero section */}
       <div className="flex flex-col justify-center items-center min-h-[calc(100vh-8rem)] py-12 relative">
-        <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.05s', animationDuration: '0.2s' }}>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight max-w-4xl mx-auto text-center">
+        <div className="animate-fade-in opacity-0 space-y-8" style={{ animationDelay: '0.05s', animationDuration: '0.3s' }}>
+          <AnimatedHeading className="font-serif text-4xl md:text-6xl lg:text-7xl mb-2 leading-tight tracking-tight max-w-4xl mx-auto text-center">
             Hey, I'm Yashaswi Mishra — aka Pixperk.
-          </h1>
+          </AnimatedHeading>
+          
           <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl mb-10 text-foreground/80 max-w-3xl mx-auto text-center"
+            className="font-serif text-2xl md:text-3xl lg:text-4xl mb-6 text-foreground/80 max-w-3xl mx-auto text-center animate-fade-in opacity-0"
+            style={{ animationDelay: '0.4s', animationDuration: '0.5s' }}
           >
             I build for the web, I write for the curious, and I break things till they work beautifully.
           </h2>
@@ -25,7 +27,7 @@ const Home = () => {
         
         <div 
           className="text-lg text-foreground/70 max-w-2xl mx-auto mb-12 animate-fade-in opacity-0 text-center" 
-          style={{ animationDelay: '0.1s', animationDuration: '0.2s' }}
+          style={{ animationDelay: '0.6s', animationDuration: '0.5s' }}
         >
           <p className="mb-4">
             I'm a backend-heavy full stack developer with a passion for elegant systems design and thoughtful architecture. 
@@ -39,11 +41,10 @@ const Home = () => {
         
         <div 
           className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0 mb-12" 
-          style={{ animationDelay: '0.15s', animationDuration: '0.2s' }}
+          style={{ animationDelay: '0.8s', animationDuration: '0.5s' }}
         >
-          <GlowButton to="/projects" className="px-6">
+          <GlowButton to="/projects" className="px-6" showArrow>
             View Projects
-            <ArrowRight className="ml-2 h-4 w-4" />
           </GlowButton>
           <GlowButton to="/blog" variant="outline" className="px-6">
             Read Blog
@@ -77,9 +78,8 @@ const Home = () => {
         </div>
         
         <div className="text-center mt-12">
-          <GlowButton to="/cli" variant="outline">
+          <GlowButton to="/cli" variant="outline" showArrow>
             Open Full Terminal
-            <ArrowRight className="ml-2 h-4 w-4" />
           </GlowButton>
         </div>
       </div>

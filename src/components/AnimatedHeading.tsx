@@ -13,7 +13,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   children,
   className,
   element = "h1",
-  delay = 15, // Faster animation delay (reduced from 30)
+  delay = 10, // Even faster animation delay 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -22,11 +22,13 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setIsVisible(true);
+          setTimeout(() => {
+            setIsVisible(true);
+          }, 100); // Small delay before starting animation
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
     );
     
     if (headingRef.current) {
@@ -43,7 +45,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
       <span
         key={index}
         className={cn(
-          "inline-block opacity-0 transition-all duration-300",
+          "inline-block opacity-0 transition-all duration-200",
           isVisible ? "opacity-100 translate-y-0" : "translate-y-4"
         )}
         style={{ 
