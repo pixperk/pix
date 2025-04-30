@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedHeadingProps {
@@ -13,7 +13,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   children,
   className,
   element = "h1",
-  delay = 30, // Faster animation delay
+  delay = 15, // Faster animation delay (reduced from 30)
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
