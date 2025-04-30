@@ -5,8 +5,9 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import { blogPosts } from "@/data/blog";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Calendar, Search } from "lucide-react";
+import { Calendar, Search, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -117,17 +118,47 @@ const Blog = () => {
                     ))}
                   </div>
                   
-                  <div className="flex items-center gap-4 text-sm text-foreground/60">
-                    <div className="flex items-center">
-                      <Avatar className="h-6 w-6 mr-2">
-                        <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&q=80" />
-                        <AvatarFallback className="text-xs">YM</AvatarFallback>
-                      </Avatar>
-                      <span>Yashaswi Mishra</span>
+                  <div className="flex flex-wrap items-center justify-between">
+                    <div className="flex items-center gap-4 text-sm text-foreground/60">
+                      <div className="flex items-center">
+                        <Avatar className="h-6 w-6 mr-2">
+                          <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&q=80" />
+                          <AvatarFallback className="text-xs">YM</AvatarFallback>
+                        </Avatar>
+                        <span>Yashaswi Mishra</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        <span>{post.date}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>{post.date}</span>
+                    
+                    {/* External reading options */}
+                    <div className="flex gap-2 mt-2 sm:mt-0">
+                      {post.externalLinks?.medium && (
+                        <a
+                          href={post.externalLinks.medium}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded-md bg-secondary/50 hover:bg-secondary transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Medium</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      {post.externalLinks?.devTo && (
+                        <a
+                          href={post.externalLinks.devTo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs px-2 py-1 rounded-md bg-secondary/50 hover:bg-secondary transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>DEV</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
