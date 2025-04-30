@@ -1,4 +1,3 @@
-
 import { ArrowRight, ArrowDown } from "lucide-react";
 import GlowButton from "@/components/GlowButton";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -18,7 +17,7 @@ const Home = () => {
             "transition-all duration-500 hover:ring-primary/40",
             "animate-float shadow-xl"
           )}>
-            <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=300&q=90" />
+            <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=300&q=90" alt="Profile" />
             <AvatarFallback className="bg-primary/10 text-primary text-4xl font-serif">YM</AvatarFallback>
           </Avatar>
         </div>
