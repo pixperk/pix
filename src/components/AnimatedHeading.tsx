@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AnimatedHeadingProps {
   children: string;
@@ -13,10 +14,11 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   children,
   className,
   element = "h1",
-  delay = 10, // Even faster animation delay 
+  delay = 8, // Even faster animation delay
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,11 +26,11 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
         if (entries[0].isIntersecting) {
           setTimeout(() => {
             setIsVisible(true);
-          }, 100); // Small delay before starting animation
+          }, 80); // Smaller delay before starting animation
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
     
     if (headingRef.current) {
@@ -41,15 +43,18 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   }, []);
   
   const renderLetters = () => {
+    // For mobile, use a smaller delay to make animation faster
+    const actualDelay = isMobile ? delay * 0.7 : delay;
+    
     return children.split("").map((letter, index) => (
       <span
         key={index}
         className={cn(
-          "inline-block opacity-0 transition-all duration-200",
+          "inline-block opacity-0 transition-all duration-150",
           isVisible ? "opacity-100 translate-y-0" : "translate-y-4"
         )}
         style={{ 
-          transitionDelay: `${isVisible ? delay * index : 0}ms`,
+          transitionDelay: `${isVisible ? actualDelay * index : 0}ms`,
           textShadow: isVisible ? "0 0 15px rgba(155, 135, 245, 0.5)" : "none"
         }}
       >

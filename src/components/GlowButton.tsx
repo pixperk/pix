@@ -3,19 +3,35 @@ import { ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GlowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline" | "ghost";
   to?: string;
   isExternal?: boolean;
   showArrow?: boolean;
+  size?: "sm" | "default" | "lg";
 }
 
 const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
-  ({ className, variant = "default", to, isExternal, children, showArrow = false, ...props }, ref) => {
+  ({ className, variant = "default", size = "default", to, isExternal, children, showArrow = false, ...props }, ref) => {
     const [isHovered, setIsHovered] = useState(false);
+    const isMobile = useIsMobile();
     
-    const baseStyles = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none h-10 py-2 px-4";
+    const baseStyles = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+    
+    let sizeStyles;
+    switch (size) {
+      case "sm":
+        sizeStyles = "h-8 py-1.5 px-3 text-xs";
+        break;
+      case "lg":
+        sizeStyles = "h-12 py-3 px-6 text-base";
+        break;
+      default:
+        sizeStyles = "h-10 py-2 px-4";
+        break;
+    }
     
     let variantStyles = "";
     switch (variant) {
@@ -30,7 +46,7 @@ const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
         break;
     }
     
-    const buttonClasses = cn(baseStyles, variantStyles, className);
+    const buttonClasses = cn(baseStyles, sizeStyles, variantStyles, className);
     
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
@@ -38,11 +54,12 @@ const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
     const Content = () => (
       <>
         {children}
-        {(showArrow || isHovered) && (
+        {(showArrow || (isHovered && !isMobile)) && (
           <ArrowRight 
             className={cn(
-              "ml-2 h-4 w-4 transition-all duration-300", 
-              isHovered ? "translate-x-0.5 opacity-100" : "opacity-70"
+              "ml-1.5 transition-all duration-300", 
+              size === "sm" ? "h-3 w-3" : size === "lg" ? "h-5 w-5" : "h-4 w-4",
+              isHovered && !isMobile ? "translate-x-0.5 opacity-100" : "opacity-70"
             )} 
           />
         )}

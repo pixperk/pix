@@ -198,3 +198,19 @@
   padding-top: 2rem;
   padding-bottom: 4rem;
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .glass {
+    backdrop-filter: blur(8px);
+  }
+  
+  .terminal-content {
+    mask-image: linear-gradient(to bottom, transparent, black 8px, black calc(100% - 8px), transparent);
+  }
+}

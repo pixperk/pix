@@ -27,7 +27,7 @@ const Layout = () => {
     <div className="flex flex-col min-h-screen font-serif">
       <ParticlesBackground />
       <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
+      <main className="flex-grow container mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 relative z-10">
         <Outlet />
       </main>
       <Footer />

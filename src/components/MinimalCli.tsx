@@ -1,7 +1,8 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Terminal } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MinimalCli = () => {
   const [input, setInput] = useState("");
@@ -10,6 +11,8 @@ const MinimalCli = () => {
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Focus input when component mounts
@@ -28,7 +31,7 @@ const MinimalCli = () => {
   const handleCommand = (command: string): string => {
     let response = "";
     
-    switch (command) {
+    switch (command.toLowerCase()) {
       case 'help':
         response = `
 Available commands:
@@ -102,7 +105,7 @@ Type 'open contact' to view the contact page.
       case 'clear':
         setHistory([]);
         setInput("");
-        return;
+        return "";
       
       case 'exit':
         response = "Redirecting to homepage...";
@@ -154,19 +157,22 @@ Type 'open contact' to view the contact page.
   return (
     <div 
       className={cn(
-        "bg-gray-950 text-green-400 p-4 rounded-lg border border-gray-800",
+        "bg-gray-950 text-green-400 p-3 sm:p-4 rounded-lg border border-gray-800",
         "font-mono text-sm sm:text-base relative"
       )}
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="flex gap-2 mb-4 border-b border-gray-800 pb-2">
-        <div className="h-3 w-3 rounded-full bg-red-500"></div>
-        <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-        <div className="h-3 w-3 rounded-full bg-green-500"></div>
+      <div className="flex gap-2 mb-3 md:mb-4 border-b border-gray-800 pb-2">
+        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-red-500"></div>
+        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-yellow-500"></div>
+        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-500"></div>
         <div className="flex-grow text-center text-xs text-gray-400">pixperk@terminal</div>
       </div>
       
-      <ScrollArea className="h-60 pr-4" hideScrollbar={true}>
+      <div 
+        ref={terminalRef}
+        className="h-48 sm:h-60 pr-2 sm:pr-4 overflow-y-auto terminal-scrollbar terminal-content"
+      >
         {history.map((item, i) => (
           <div key={i} className="mb-1">
             {item.type === "input" ? (
@@ -175,7 +181,7 @@ Type 'open contact' to view the contact page.
                 <span>{item.content}</span>
               </div>
             ) : (
-              <div className="text-gray-300 ml-3">{item.content}</div>
+              <div className="text-gray-300 ml-2 sm:ml-3 whitespace-pre-wrap text-xs sm:text-sm">{item.content}</div>
             )}
           </div>
         ))}
@@ -197,13 +203,14 @@ Type 'open contact' to view the contact page.
                 setInput("");
               }
             }}
-            className="bg-transparent outline-none border-none flex-grow text-green-400"
+            className="bg-transparent outline-none border-none flex-grow text-green-400 text-xs sm:text-sm"
             spellCheck={false}
             autoComplete="off"
+            placeholder={isMobile ? "Type command..." : ""}
           />
         </div>
         <div ref={bottomRef} />
-      </ScrollArea>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "./ThemeProvider";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
@@ -58,12 +58,12 @@ const Navbar = () => {
   return (
     <nav className={navbarClasses}>
       <div className="container mx-auto px-4">
-        <div className="relative flex h-20 items-center justify-between">
+        <div className="relative flex h-16 sm:h-18 md:h-20 items-center justify-between">
           <div className="flex items-center">
             <Link 
               to="/" 
               className={cn(
-                "font-serif text-2xl font-bold tracking-tight transition-all duration-300",
+                "font-serif text-xl sm:text-2xl font-bold tracking-tight transition-all duration-300",
                 isScrolled ? "text-foreground hover:text-primary" : "text-foreground hover:text-primary"
               )}
             >
@@ -75,13 +75,13 @@ const Navbar = () => {
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "font-serif transition-all duration-200 relative group",
+                  "font-serif transition-all duration-200 relative group text-sm lg:text-base",
                   location.pathname === item.href 
                     ? "text-primary font-medium" 
                     : "text-foreground/80 hover:text-primary"
@@ -96,10 +96,10 @@ const Navbar = () => {
             ))}
           </div>
           
-          <div className="flex items-center gap-4">
-            <Avatar className="h-8 w-8 rounded-full ring-2 ring-primary/20 transition-all duration-300 hover:ring-primary/70">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Avatar className="h-7 w-7 sm:h-8 sm:w-8 rounded-full ring-2 ring-primary/20 transition-all duration-300 hover:ring-primary/70">
               <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&q=80" />
-              <AvatarFallback className="bg-primary/10 text-primary">YM</AvatarFallback>
+              <AvatarFallback className="bg-primary/10 text-primary text-xs">YM</AvatarFallback>
             </Avatar>
 
             <Button
@@ -107,30 +107,30 @@ const Navbar = () => {
               size="icon"
               onClick={toggleTheme}
               className={cn(
-                "rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110",
+                "rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 h-8 w-8 sm:h-9 sm:w-9",
                 theme === "light" ? "bg-secondary/50" : "bg-secondary/30"
               )}
               aria-label="Toggle theme"
             >
               {theme === "light" ? (
-                <Moon size={18} className="transition-transform duration-300 hover:rotate-12" />
+                <Moon size={16} className="transition-transform duration-300 hover:rotate-12" />
               ) : (
-                <Sun size={18} className="transition-transform duration-300 hover:rotate-12" />
+                <Sun size={16} className="transition-transform duration-300 hover:rotate-12" />
               )}
             </Button>
             
             {/* Mobile menu button */}
             <button
-              className="md:hidden flex items-center justify-center p-2 rounded-md glass"
+              className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-md glass"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle menu"
             >
-              <div className="flex flex-col gap-1.5">
-                <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-                <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-                <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-              </div>
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5 text-foreground" />
+              ) : (
+                <Menu className="h-5 w-5 text-foreground" />
+              )}
             </button>
           </div>
         </div>
@@ -138,9 +138,12 @@ const Navbar = () => {
       
       {/* Mobile menu */}
       <div 
-        className={`md:hidden absolute w-full glass backdrop-blur-lg shadow-lg border-t border-border transition-all duration-300 ${
-          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
+        className={cn(
+          "md:hidden absolute w-full glass backdrop-blur-lg shadow-lg border-t border-border transition-all duration-300 z-50",
+          isMobileMenuOpen 
+            ? "translate-y-0 opacity-100 pointer-events-auto" 
+            : "-translate-y-full opacity-0 pointer-events-none"
+        )}
       >
         <div className="container mx-auto px-4 py-4 space-y-1">
           {navigation.map((item) => (
@@ -148,7 +151,7 @@ const Navbar = () => {
               key={item.name}
               to={item.href}
               className={cn(
-                "block py-3 text-lg font-serif transition-colors relative group",
+                "block py-2.5 text-base sm:text-lg font-serif transition-colors relative group",
                 location.pathname === item.href
                   ? "text-primary font-medium"
                   : "text-foreground/80 hover:text-primary"

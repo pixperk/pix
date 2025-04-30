@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Cli = () => {
   const [input, setInput] = useState("");
@@ -9,6 +10,7 @@ const Cli = () => {
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Focus the input field when component mounts
@@ -170,16 +172,16 @@ Type 'open contact' to view the contact page.
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center">
+    <div className="min-h-[70vh] sm:min-h-[80vh] flex flex-col items-center justify-center px-2">
       <div 
-        className="w-full max-w-3xl h-[70vh] bg-black/90 rounded-lg border border-foreground/20 overflow-hidden flex flex-col"
+        className="w-full max-w-3xl h-[60vh] sm:h-[70vh] bg-black/90 rounded-lg border border-foreground/20 overflow-hidden flex flex-col"
       >
         {/* Terminal header */}
         <div className="bg-foreground/10 p-2 flex items-center">
-          <div className="flex space-x-2 mr-4">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div className="flex space-x-2 mr-3 sm:mr-4">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
           </div>
           <span className="text-xs text-foreground/70">pixperk ~ terminal</span>
         </div>
@@ -187,7 +189,7 @@ Type 'open contact' to view the contact page.
         {/* Terminal content */}
         <div 
           ref={terminalRef}
-          className="flex-grow p-4 font-mono text-sm overflow-y-auto"
+          className="flex-grow p-3 sm:p-4 font-mono text-xs sm:text-sm overflow-y-auto terminal-scrollbar terminal-content"
         >
           {history.map((entry, index) => (
             <div key={index} className="mb-2">
@@ -210,17 +212,18 @@ Type 'open contact' to view the contact page.
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-grow bg-transparent border-none outline-none text-foreground"
+              className="flex-grow bg-transparent border-none outline-none text-foreground text-xs sm:text-sm"
               autoFocus
               aria-label="Terminal input"
+              placeholder={isMobile ? "Type command..." : ""}
             />
           </form>
         </div>
       </div>
       
-      <div className="mt-6 text-sm text-foreground/60">
+      <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-center text-foreground/60 px-2">
         <p>Type 'help' for available commands or 'exit' to return to homepage.</p>
-        <p className="mt-2 text-xs">Try <code>summon("kafka_cluster")</code> for a surprise! 🧙‍♂️</p>
+        <p className="mt-1.5 sm:mt-2 text-xs">Try <code className="bg-secondary/40 px-1.5 py-0.5 rounded">summon("kafka_cluster")</code> for a surprise! 🧙‍♂️</p>
       </div>
     </div>
   );
