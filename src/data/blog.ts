@@ -1,4 +1,3 @@
-
 export interface BlogPost {
   slug: string;
   title: string;
@@ -7,6 +6,10 @@ export interface BlogPost {
   tags: string[];
   content?: string;
   coverImage?: string;
+  externalLinks?: {
+    medium?: string;
+    devTo?: string;
+  };
 }
 
 export const blogPosts: BlogPost[] = [

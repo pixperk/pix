@@ -1,44 +1,31 @@
-
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Terminal } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 const MinimalCli = () => {
   const [input, setInput] = useState("");
-  const [history, setHistory] = useState<{type: 'input' | 'output', content: string}[]>([
-    {type: 'output', content: "Welcome to Pixperk's Terminal. Type 'help' for available commands."}
+  const [history, setHistory] = useState<Array<{ type: "input" | "output"; content: string }>>([
+    { type: "output", content: "Welcome to Pixperk Terminal! Type 'help' to see available commands." },
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const terminalRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Focus the input field when component mounts
-    inputRef.current?.focus();
-    
-    // Add event listener for click to focus input
-    const handleClick = () => inputRef.current?.focus();
-    document.addEventListener('click', handleClick);
-    
-    return () => document.removeEventListener('click', handleClick);
+    // Focus input when component mounts
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
-    // Scroll to bottom of terminal when history updates
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    // Scroll to bottom when history updates
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [history]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!input.trim()) return;
-    
-    // Add user input to history
-    setHistory(prev => [...prev, {type: 'input', content: input}]);
-    
-    // Process command
-    const command = input.trim().toLowerCase();
+  const handleCommand = (command: string): string => {
     let response = "";
     
     switch (command) {
@@ -161,61 +148,62 @@ Type 'open contact' to view the contact page.
         response = `Command not found: ${command}. Type 'help' for available commands.`;
     }
     
-    // Add response to history
-    setTimeout(() => {
-      setHistory(prev => [...prev, {type: 'output', content: response}]);
-    }, 100);
-    
-    // Clear input
-    setInput("");
+    return response;
   };
 
   return (
     <div 
-      className="w-full max-w-3xl h-[50vh] bg-black/90 rounded-lg border border-foreground/20 overflow-hidden flex flex-col mx-auto"
+      className={cn(
+        "bg-gray-950 text-green-400 p-4 rounded-lg border border-gray-800",
+        "font-mono text-sm sm:text-base relative"
+      )}
+      onClick={() => inputRef.current?.focus()}
     >
-      {/* Terminal header */}
-      <div className="bg-foreground/10 p-2 flex items-center">
-        <div className="flex space-x-2 mr-4">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
-        <span className="text-xs text-foreground/70">pixperk ~ terminal</span>
+      <div className="flex gap-2 mb-4 border-b border-gray-800 pb-2">
+        <div className="h-3 w-3 rounded-full bg-red-500"></div>
+        <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+        <div className="h-3 w-3 rounded-full bg-green-500"></div>
+        <div className="flex-grow text-center text-xs text-gray-400">pixperk@terminal</div>
       </div>
       
-      {/* Terminal content */}
-      <div 
-        ref={terminalRef}
-        className="flex-grow p-4 font-mono text-sm overflow-y-auto"
-      >
-        {history.map((entry, index) => (
-          <div key={index} className="mb-2">
-            {entry.type === 'input' ? (
-              <div>
-                <span className="text-primary">pixperk@terminal</span>
-                <span className="text-foreground/70">:~$</span> {entry.content}
+      <ScrollArea className="h-60 pr-4" hideScrollbar={true}>
+        {history.map((item, i) => (
+          <div key={i} className="mb-1">
+            {item.type === "input" ? (
+              <div className="flex">
+                <span className="text-blue-400 mr-1">$</span>
+                <span>{item.content}</span>
               </div>
             ) : (
-              <pre className="whitespace-pre-wrap text-foreground/90">{entry.content}</pre>
+              <div className="text-gray-300 ml-3">{item.content}</div>
             )}
           </div>
         ))}
         
-        <form onSubmit={handleSubmit} className="flex mt-2">
-          <span className="text-primary">pixperk@terminal</span>
-          <span className="text-foreground/70">:~$</span>&nbsp;
+        <div className="flex">
+          <span className="text-blue-400 mr-1">$</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="flex-grow bg-transparent border-none outline-none text-foreground"
-            autoFocus
-            aria-label="Terminal input"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && input.trim() !== "") {
+                setHistory([
+                  ...history,
+                  { type: "input", content: input },
+                  { type: "output", content: handleCommand(input.trim()) }
+                ]);
+                setInput("");
+              }
+            }}
+            className="bg-transparent outline-none border-none flex-grow text-green-400"
+            spellCheck={false}
+            autoComplete="off"
           />
-        </form>
-      </div>
+        </div>
+        <div ref={bottomRef} />
+      </ScrollArea>
     </div>
   );
 };

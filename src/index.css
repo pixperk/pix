@@ -174,3 +174,20 @@
 .prose a {
   @apply text-primary underline decoration-primary/30 hover:decoration-primary;
 }
+
+/* Hide scrollbars for terminal components but retain functionality */
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.terminal-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Ensure page content is properly visible by fixing any overlap issues */
+.content-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}

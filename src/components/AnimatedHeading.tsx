@@ -13,7 +13,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   children,
   className,
   element = "h1",
-  delay = 100,
+  delay = 30, // Faster animation delay
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -43,7 +43,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
       <span
         key={index}
         className={cn(
-          "inline-block opacity-0 transition-all duration-500",
+          "inline-block opacity-0 transition-all duration-300",
           isVisible ? "opacity-100 translate-y-0" : "translate-y-4"
         )}
         style={{ 

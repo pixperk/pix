@@ -12,7 +12,7 @@ const Home = () => {
     <div className="flex flex-col">
       {/* Full-height hero section */}
       <div className="flex flex-col justify-center items-center min-h-[calc(100vh-8rem)] py-12 relative">
-        <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.1s', animationDuration: '0.3s' }}>
+        <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.05s', animationDuration: '0.2s' }}>
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight max-w-4xl mx-auto text-center">
             Hey, I'm Yashaswi Mishra — aka Pixperk.
           </h1>
@@ -25,7 +25,7 @@ const Home = () => {
         
         <div 
           className="text-lg text-foreground/70 max-w-2xl mx-auto mb-12 animate-fade-in opacity-0 text-center" 
-          style={{ animationDelay: '0.2s', animationDuration: '0.3s' }}
+          style={{ animationDelay: '0.1s', animationDuration: '0.2s' }}
         >
           <p className="mb-4">
             I'm a backend-heavy full stack developer with a passion for elegant systems design and thoughtful architecture. 
@@ -39,7 +39,7 @@ const Home = () => {
         
         <div 
           className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0 mb-12" 
-          style={{ animationDelay: '0.3s', animationDuration: '0.3s' }}
+          style={{ animationDelay: '0.15s', animationDuration: '0.2s' }}
         >
           <GlowButton to="/projects" className="px-6">
             View Projects
