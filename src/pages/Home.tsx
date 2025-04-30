@@ -1,3 +1,4 @@
+
 import { ArrowRight, ArrowDown } from "lucide-react";
 import GlowButton from "@/components/GlowButton";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -24,7 +25,7 @@ const Home = () => {
 
         <div className="animate-fade-in opacity-0 text-center" style={{ animationDelay: '0.3s' }}>
           <AnimatedHeading className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight max-w-4xl mx-auto">
-            Hey, I'm Yashaswi Mishra <span className="block mt-2">— aka Pixperk.</span>
+            Hey, I'm Yashaswi Mishra — aka Pixperk.
           </AnimatedHeading>
           <AnimatedHeading 
             element="h2" 
