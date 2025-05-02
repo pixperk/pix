@@ -987,7 +987,7 @@ useEffect(() => {
               </div>
               <div>
                 <p className="font-medium">LinkedIn</p>
-                <p className="text-foreground/80">linkedin.com/in/pixperk</p>
+                <p className="text-foreground/80">linkedin.com/in/yashaswi-kumar-mishra-459a53285/</p>
               </div>
               <Button 
                 variant="ghost" 
@@ -1053,7 +1053,7 @@ useEffect(() => {
       name: "linkedin",
       description: "Open my LinkedIn profile",
       handler: () => {
-        window.open("https://linkedin.com/in/pixperk", "_blank");
+        window.open("https://www.linkedin.com/in/yashaswi-kumar-mishra-459a53285/", "_blank");
         return "Opening LinkedIn profile in a new tab...";
       }
     },

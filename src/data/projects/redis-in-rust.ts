@@ -10,8 +10,8 @@ export const redisInRust: Project = {
     type: "backend",
     languages: ["Rust"],
     completionPercent: 85,
-    githubUrl : "https s://github.com/pixperk/redis-in-rust",
-    liveUrl : "https s://github.com/pixperk/redis-in-rust",
+    githubUrl : "https://github.com/pixperk/redis_in_rust",
+    liveUrl : "https://github.com/pixperk/redis_in_rust",
     slug: "redis-in-rust",
     content : `
 
