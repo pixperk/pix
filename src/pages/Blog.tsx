@@ -8,6 +8,7 @@ import { Calendar, Search, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Pagination from "@/components/Pagination";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Metadata from "@/components/Metadata";
 
 const Blog = () => {
   const isMobile = useIsMobile();
@@ -55,6 +56,11 @@ const Blog = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-2 sm:px-4">
+       <Metadata
+                    title="Blog | Yashaswi Mishra"
+                    description="Explore my blog for insights on software development, technology, and more."
+                    keywords="blog, software development, technology, Yashaswi Mishra, Pixperk"
+                  />
       <div className="text-center mb-8 sm:mb-12 animate-fade-in opacity-0">
         <AnimatedHeading className="font-serif text-3xl sm:text-4xl md:text-5xl mb-3 sm:mb-4">
           Blog

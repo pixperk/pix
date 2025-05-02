@@ -7,6 +7,7 @@ import GlowButton from "@/components/GlowButton";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import Metadata from "@/components/Metadata";
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -94,6 +95,11 @@ const Contact = () => {
   
   return (
     <div className="max-w-5xl mx-auto">
+       <Metadata
+                    title="Contact | Yashaswi Mishra"
+                    description="Get in touch with Yashaswi Mishra, a full stack developer. Let's build something purposeful together."
+                    keywords="contact, full stack developer, Yashaswi Mishra, Pixperk, web development"
+                  />
       <div className="text-center mb-16 animate-fade-in opacity-0">
         <AnimatedHeading className="text-4xl md:text-5xl mb-4">
           Get in Touch

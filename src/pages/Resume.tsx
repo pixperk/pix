@@ -1,5 +1,6 @@
 import AnimatedHeading from "@/components/AnimatedHeading";
 import GlowButton from "@/components/GlowButton";
+import Metadata from "@/components/Metadata";
 import { Button } from "@/components/ui/button";
 import { Award, BookOpen, Briefcase, Cloud, Code, Database, Download, ExternalLink, Server } from "lucide-react";
 
@@ -38,6 +39,11 @@ const Resume = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+       <Metadata
+                    title="Resume | Yashaswi Mishra"
+                    description="Explore the resume of Yashaswi Mishra, a full stack developer with expertise in backend systems and real-time applications."
+                    keywords="resume, full stack developer, Yashaswi Mishra, Pixperk, web development, backend systems"
+                  />
       <div className="text-center mb-12 animate-fade-in opacity-0">
         <AnimatedHeading className="font-serif text-5xl mb-4">
           Resume

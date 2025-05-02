@@ -12,6 +12,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import Metadata from "@/components/Metadata";
 
 // View Mode types
 type ViewMode = "grid" | "list" | "carousel";
@@ -149,6 +150,11 @@ const Projects = () => {
   
   return (
     <MotionConfig transition={{ ease: [0.22, 1, 0.36, 1] }}>
+      <Metadata
+              title="Projects | Yashaswi Mishra"
+              description="Explore my projects, showcasing my skills in full stack development, software engineering, and more."
+              keywords="Yashaswi Mishra, Projects, Software Engineer, Full Stack Developer, Portfolio"
+            />
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
         {/* Header */}
         <motion.div 
