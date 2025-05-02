@@ -23,7 +23,7 @@ const Footer = () => {
               GitHub
             </a>
             <a 
-              href="https://twitter.com/pixperk" 
+              href="https://twitter.com/PixPerk_" 
               target="_blank" 
               rel="noreferrer" 
               className="text-foreground/70 hover:text-primary transition-colors"
@@ -31,7 +31,7 @@ const Footer = () => {
               Twitter
             </a>
             <a 
-              href="https://linkedin.com/in/pixperk" 
+              href="https://www.linkedin.com/in/yashaswi-kumar-mishra-459a53285/" 
               target="_blank" 
               rel="noreferrer" 
               className="text-foreground/70 hover:text-primary transition-colors"

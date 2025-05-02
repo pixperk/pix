@@ -10,7 +10,7 @@ const About = () => {
           About Me
         </AnimatedHeading>
         <p className="text-lg text-foreground/70">
-          The journey, the tools, and the philosophy that shapes my work
+          The journey, the tools, and the philosophy that shapes my work and life.
         </p>
       </div>
       
@@ -20,12 +20,16 @@ const About = () => {
             <div className="aspect-square rounded-full border-2 border-border bg-muted/50 mb-6 overflow-hidden animate-float">
               {/* Placeholder for profile image - replace with actual image */}
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-glow-lavender/10 to-glow-pink/10">
-                <span className="text-6xl font-serif">YM</span>
+                <img 
+                  src="/assets/avatar.jpg" 
+                  alt="Yashaswi Mishra" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
             </div>
             
             <div className="space-y-1 text-sm">
-              <h3 className="font-medium">Yashaswi Mishra</h3>
+              <h3 className="font-medium">pixperk / Yashaswi Mishra</h3>
               <p className="text-foreground/70">Full Stack Developer</p>
               <p className="text-foreground/70">Based in India</p>
             </div>
@@ -37,21 +41,23 @@ const About = () => {
             <h2 className="font-serif text-2xl mb-4 glow-text">My Journey</h2>
             <div className="prose prose-sm dark:prose-invert max-w-none">
               <p className="mb-4">
-                My path to software development began with a curiosity about how things work. As a child, 
-                I would take apart electronics just to understand their inner workings, rarely succeeding in putting 
-                them back together correctly. This natural inclination to explore and understand systems led me to programming.
+                I actually never wanted to make a career in  programming until I was in 11th grade. I enjoyed learnig OOPS concepts in C++ and was fascinated by how I could create something from nothing.
+                I started with C++ but then went on to prepare for JEE. Cut short to 2023, my first year in college, where I learn C++.
+                I quickly got into webdev and built small projects. In the vacations of first year, I learnt nodejs and kept diving deep into backend development.
+                I started building full-stack projects and delved deeper and deeper into systems, architecture, and design patterns.
+                
               </p>
               <p className="mb-4">
-                I studied Computer Science at university, but found my most valuable education came from 
-                late-night coding sessions and collaborative open source projects. The blend of formal education 
-                and self-directed learning shaped my approach to development: methodical yet creative, 
-                technical yet human-centered.
+              I learnt Rust and Go, and started building projects in them. I also started learning about distributed systems and databases.
+                I built a Redis clone in Rust and a monitoring system in Go. I also started writing blogs about my learnings and projects.
+                Currently, I am building some GOOD projects in Rust and Go, and I can't wait  to share them with you.
+                I enjoy reading docs and learning about new technologies. I also enjoy writing about my learnings and projects.
+                I believe in sharing knowledge and helping others learn. I am always open to feedback and suggestions.
               </p>
               <p>
-                Over the years, I've worked with startups and established companies alike, building 
-                everything from real-time data processing systems to user-friendly web applications. 
-                Each project has taught me something new about code, design, and the delicate art of 
-                translating human needs into digital solutions.
+                I am currently looking for internships and freelance opportunities. If you are interested in working with me, feel free to reach out! 
+                I am always open to new opportunities and collaborations.
+                I am also open to feedback and suggestions. I believe in continuous learning and improvement.
               </p>
             </div>
           </section>
@@ -105,6 +111,9 @@ const About = () => {
                 I approach software development as a craft that requires both technical precision and 
                 creative problem-solving. While I deeply appreciate elegant code and efficient algorithms, 
                 I never lose sight of the humans who will ultimately use what I build.
+                I am addicted to improving and refactoring my code. I believe in writing clean, maintainable code that is easy to read and understand.
+                I also love breaking stuff, make mistakes, fail and then pick up the pieces and learn from them.
+
               </p>
               <p className="mb-4">
                 I believe in:
@@ -122,11 +131,12 @@ const About = () => {
             <h2 className="font-serif text-2xl mb-4 glow-text">Fun Facts</h2>
             <div className="prose prose-sm dark:prose-invert max-w-none">
               <ul>
-                <li>I have a collection of over 20 mechanical keyboards.</li>
-                <li>I've written and published a technical book on distributed systems.</li>
-                <li>I once debugged a production issue while hiking at 14,000 feet.</li>
-                <li>My most used keyboard shortcut is Ctrl+Z.</li>
-                <li>I maintain a garden where I grow vegetables and coding bugs.</li>
+                <li>I learnt Next.js before diving into react first.</li>
+                <li>I am addicted to note taking by hand.</li>
+                <li>I hate laptop stickers.</li>
+                <li>I have a habit of writing down my thoughts and ideas on my desk.</li>
+                <li>I made this portfolio in under 2 days.</li>
+                <li>I document everything I learn.</li>
               </ul>
             </div>
           </section>

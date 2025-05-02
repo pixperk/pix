@@ -97,14 +97,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         
         {/* Buttons */}
         <div className="flex gap-3 mt-auto">
-          <GlowButton
+          <GlowButton showArrow={true}
+          
             to={`/projects/${slug}`}
             className="text-sm px-3 py-1 h-auto"
           >
             View Details
           </GlowButton>
           {githubUrl && (
-            <GlowButton
+            <GlowButton showArrow={true}
               variant="ghost"
               isExternal
               to={githubUrl}

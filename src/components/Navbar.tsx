@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "./ThemeProvider";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
@@ -59,7 +58,7 @@ const Navbar = () => {
     <nav className={navbarClasses}>
       <div className="container mx-auto px-4">
         <div className="relative flex h-16 sm:h-18 md:h-20 items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             <Link 
               to="/" 
               className={cn(
@@ -68,10 +67,16 @@ const Navbar = () => {
               )}
             >
               <span className="relative inline-block">
-                <span className="glow-text">Pixperk</span>
+                <span className="font-serif glow-text">pixperk.</span>
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary/80 via-glow-pink to-glow-blue/80 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
               </span>
             </Link>
+            
+            {/* Avatar moved next to brand name */}
+            <Avatar className="h-7 w-7 sm:h-8 sm:w-8 rounded-full ring-2 ring-primary/20 transition-all duration-300 hover:ring-primary/70">
+              <AvatarImage src="/assets/avatar.jpg" />
+              <AvatarFallback className="bg-primary/10 text-primary text-xs">YM</AvatarFallback>
+            </Avatar>
           </div>
           
           {/* Desktop Menu */}
@@ -97,10 +102,24 @@ const Navbar = () => {
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4">
-            <Avatar className="h-7 w-7 sm:h-8 sm:w-8 rounded-full ring-2 ring-primary/20 transition-all duration-300 hover:ring-primary/70">
-              <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&q=80" />
-              <AvatarFallback className="bg-primary/10 text-primary text-xs">YM</AvatarFallback>
-            </Avatar>
+            {/* CLI Button - Standout button that draws attention */}
+            <Link to="/cli">
+              <Button 
+                variant="default"
+                size="sm"
+                className={cn(
+                  "rounded-md font-medium text-xs sm:text-sm px-3 py-1.5 sm:py-2 transition-all duration-300",
+                  "bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-md hover:shadow-primary/20",
+                  "border border-primary/50 hover:border-primary",
+                  "relative group overflow-hidden"
+                )}
+              >
+                <Terminal size={14} className="mr-1.5 transition-transform group-hover:rotate-3" />
+                <span>CLI</span>
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-transparent to-primary 
+                  opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"></span>
+              </Button>
+            </Link>
 
             <Button
               variant="ghost"
@@ -164,6 +183,21 @@ const Navbar = () => {
               )}></span>
             </Link>
           ))}
+          
+          {/* CLI link in mobile menu */}
+          <Link
+            to="/cli"
+            className={cn(
+              "flex items-center gap-2 py-2.5 text-base sm:text-lg font-serif",
+              "text-primary font-medium"
+            )}
+          >
+            <Terminal size={16} />
+            CLI
+            <span className="ml-1 inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium bg-primary/20 text-primary">
+              New
+            </span>
+          </Link>
         </div>
       </div>
     </nav>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -8,13 +7,15 @@ interface AnimatedHeadingProps {
   className?: string;
   element?: "h1" | "h2" | "h3" | "h4";
   delay?: number;
+  glowColor?: string;
 }
 
 const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   children,
   className,
   element = "h1",
-  delay = 8, // Even faster animation delay
+  delay = 8,
+  glowColor = "rgba(155, 135, 245, 0.8)", // Default purple-ish neon glow
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -26,7 +27,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
         if (entries[0].isIntersecting) {
           setTimeout(() => {
             setIsVisible(true);
-          }, 80); // Smaller delay before starting animation
+          }, 80);
           observer.disconnect();
         }
       },
@@ -43,7 +44,6 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   }, []);
   
   const renderLetters = () => {
-    // For mobile, use a smaller delay to make animation faster
     const actualDelay = isMobile ? delay * 0.7 : delay;
     
     return children.split("").map((letter, index) => (
@@ -55,7 +55,9 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
         )}
         style={{ 
           transitionDelay: `${isVisible ? actualDelay * index : 0}ms`,
-          textShadow: isVisible ? "0 0 15px rgba(155, 135, 245, 0.5)" : "none"
+          textShadow: isVisible 
+            ? `0 0 5px ${glowColor}, 0 0 15px ${glowColor}, 0 0 30px ${glowColor.replace(', 0.8)', ', 0.4)')}`
+            : "none"
         }}
       >
         {letter === " " ? "\u00A0" : letter}

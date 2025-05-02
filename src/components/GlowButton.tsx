@@ -1,4 +1,3 @@
-
 import { ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -10,11 +9,22 @@ interface GlowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   to?: string;
   isExternal?: boolean;
   showArrow?: boolean;
+  arrowPosition?: "right" | "none";
   size?: "sm" | "default" | "lg";
 }
 
 const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
-  ({ className, variant = "default", size = "default", to, isExternal, children, showArrow = false, ...props }, ref) => {
+  ({ 
+    className, 
+    variant = "default", 
+    size = "default", 
+    to, 
+    isExternal, 
+    children, 
+    showArrow = false, 
+    arrowPosition = "right",
+    ...props 
+  }, ref) => {
     const [isHovered, setIsHovered] = useState(false);
     const isMobile = useIsMobile();
     
@@ -51,10 +61,14 @@ const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
     
+    // Fixed logic: Only show arrow if arrowPosition is 'right' AND showArrow is true
+    // Don't show the hover arrow at all if showArrow is false
+    const shouldShowArrow = arrowPosition !== "none" && showArrow;
+    
     const Content = () => (
       <>
         {children}
-        {(showArrow || (isHovered && !isMobile)) && (
+        {shouldShowArrow && (
           <ArrowRight 
             className={cn(
               "ml-1.5 transition-all duration-300", 

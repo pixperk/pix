@@ -45,28 +45,34 @@ const Contact = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+  
     try {
       // Validate form data
       contactSchema.parse(formData);
-      
+  
       setIsSubmitting(true);
-      
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
-      // Success
+  
+      const res = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!res.ok) {
+        throw new Error("Form submission failed.");
+      }
+  
       toast({
         title: "Message sent!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      
-      // Reset form
+  
       setFormData({ name: "", email: "", message: "" });
-      
+  
     } catch (err) {
       if (err instanceof z.ZodError) {
-        // Extract and set validation errors
         const fieldErrors: Record<string, string> = {};
         err.errors.forEach((error) => {
           if (error.path[0]) {
@@ -75,7 +81,6 @@ const Contact = () => {
         });
         setErrors(fieldErrors);
       } else {
-        // Handle other errors
         toast({
           title: "Error",
           description: "Something went wrong. Please try again later.",
@@ -161,7 +166,7 @@ const Contact = () => {
               )}
             </div>
             
-            <GlowButton
+            <GlowButton showArrow={true}
               type="submit"
               className="w-full"
               disabled={isSubmitting}
@@ -193,10 +198,10 @@ const Contact = () => {
             <div>
               <h3 className="text-sm font-medium mb-1">Email</h3>
               <a 
-                href="mailto:hello@pixperk.dev" 
+                href="mailto:mishrayashaswikumar@gmail.com" 
                 className="text-primary hover:opacity-80 transition-opacity"
               >
-                hello@pixperk.dev
+                mishrayashaswikumar@gmail.com
               </a>
             </div>
             
@@ -212,7 +217,7 @@ const Contact = () => {
                   GitHub
                 </a>
                 <a 
-                  href="https://twitter.com/pixperk" 
+                  href="https://twitter.com/PixPerk_" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="text-foreground/80 hover:text-primary transition-colors"
@@ -220,7 +225,7 @@ const Contact = () => {
                   Twitter
                 </a>
                 <a 
-                  href="https://linkedin.com/in/pixperk" 
+                  href="https://www.linkedin.com/in/yashaswi-kumar-mishra-459a53285/" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="text-foreground/80 hover:text-primary transition-colors"

@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import { blogPosts } from "@/data/blog";
@@ -7,11 +6,15 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, Search, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import Pagination from "@/components/Pagination";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Blog = () => {
+  const isMobile = useIsMobile();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5; // Number of posts to show per page
   
   // Get all unique tags
   const allTags = Array.from(
@@ -22,13 +25,33 @@ const Blog = () => {
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch = 
       searchQuery === "" || 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      (post.title?.toLowerCase() ?? "").includes(searchQuery.toLowerCase()) ||
+      (post.excerpt?.toLowerCase() ?? "").includes(searchQuery.toLowerCase());
       
     const matchesTag = activeTag === null || post.tags.includes(activeTag);
     
     return matchesSearch && matchesTag;
   });
+
+  // Get current posts for pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Smooth scroll to top of the post list
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, activeTag]);
 
   return (
     <div className="max-w-4xl mx-auto px-2 sm:px-4">
@@ -83,8 +106,8 @@ const Blog = () => {
       
       {/* Blog posts */}
       <div className="space-y-4 sm:space-y-8 animate-fade-in opacity-0" style={{ animationDelay: "0.5s" }}>
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        {currentPosts.length > 0 ? (
+          currentPosts.map((post) => (
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}
@@ -122,7 +145,7 @@ const Blog = () => {
                     <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-foreground/60">
                       <div className="flex items-center">
                         <Avatar className="h-5 w-5 sm:h-6 sm:w-6 mr-1.5 sm:mr-2">
-                          <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&q=80" />
+                          <AvatarImage src="/assets/avatar.jpg" />
                           <AvatarFallback className="text-xs">YM</AvatarFallback>
                         </Avatar>
                         <span>Yashaswi Mishra</span>
@@ -171,6 +194,24 @@ const Blog = () => {
           <div className="text-center py-12 sm:py-20 text-foreground/60">
             No posts found matching your filters.
           </div>
+        )}
+      </div>
+      
+      {/* Pagination */}
+      <div className="mt-8 sm:mt-12 animate-fade-in opacity-0" style={{ animationDelay: "0.7s" }}>
+        <Pagination 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          showFirstLast={!isMobile}
+          maxPageButtons={isMobile ? 3 : 5}
+        />
+        
+        {/* Posts count summary */}
+        {filteredPosts.length > 0 && (
+          <p className="text-center text-xs sm:text-sm text-foreground/60 mt-4">
+            Showing {indexOfFirstPost + 1}-{Math.min(indexOfLastPost, filteredPosts.length)} of {filteredPosts.length} posts
+          </p>
         )}
       </div>
     </div>
