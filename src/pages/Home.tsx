@@ -104,7 +104,7 @@ const Home = () => {
               and thoughtful architecture.
             </p>
             <p>
-              Currently crafting scalable solutions with Next.js, Rust, and event-driven architectures, 
+              Currently crafting scalable solutions with Next.js, Go, Rust, and event-driven architectures, 
               while exploring the beauty of distributed systems.
             </p>
           </motion.div>

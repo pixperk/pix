@@ -4,7 +4,7 @@ export const redisInRust: Project = {
    id : 100,
     title: "Redis in Rust",
     description: "A Redis clone built from scratch in Rust, focusing on performance and concurrency.",
-    imageUrl: "https://github.com/pixperk/redis_in_rust/raw/main/assets/banner.jpg",
+    imageUrl: "https://pbs.twimg.com/media/GoVF-DEWoAAQhsv?format=jpg&name=medium",
     tags: ["Rust", "Redis", "Database"],
     frameworks: ["Tokio"],
     type: "backend",

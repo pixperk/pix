@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
-import { Filter, X, Search, ArrowRight, ExternalLink, Github, List, Grid, Calendar } from "lucide-react";
+import { Filter, X, Search, ArrowRight, ExternalLink, Github, List, Grid, Calendar, GlassWater } from "lucide-react";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import ProjectSlider from "@/components/ProjectSlider";
 import GlowButton from "@/components/GlowButton";
@@ -184,7 +184,12 @@ const Projects = () => {
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             {/* Search input */}
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/50" />
+          
+                <Search className={cn(
+                  "absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4",
+                  theme === "dark" ? "text-foreground/60" : "text-foreground/70" 
+                )} />
+          
               <input 
                 type="text"
                 placeholder="Search projects..."
