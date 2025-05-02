@@ -515,17 +515,20 @@ const Home = () => {
           >
             Contact Me
           </GlowButton>
-          <Link 
+            <Link 
             to="mailto:mishrayashaswikumar@gmail.com" 
             className={cn(
-          "px-4 py-2 rounded-md text-center transition-colors",
-          theme === "dark" 
-            ? "bg-foreground/10 hover:bg-foreground/20 text-foreground" 
-            : "bg-foreground/5 hover:bg-foreground/10 text-foreground"
+              "px-3 sm:px-4 py-2 rounded-md text-center transition-colors w-full sm:w-auto",
+              "truncate overflow-hidden text-sm sm:text-base flex items-center justify-center",
+              theme === "dark" 
+              ? "bg-foreground/10 hover:bg-foreground/20 text-foreground" 
+              : "bg-foreground/5 hover:bg-foreground/10 text-foreground"
             )}
-          >
-            mishrayashaswikumar@gmail.com
-          </Link>
+            title="mishrayashaswikumar@gmail.com"
+            >
+            <span className="hidden sm:inline">mishrayashaswikumar@gmail.com</span>
+            <span className="sm:hidden">Email Me</span>
+            </Link>
         </div>
           </motion.div>
         </div>
