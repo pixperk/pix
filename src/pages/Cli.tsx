@@ -930,14 +930,14 @@ useEffect(() => {
               </div>
               <div>
                 <p className="font-medium">Email</p>
-                <p className="text-foreground/80">hello@pixperk.dev</p>
+                <p className="text-foreground/80">mishrayashaswikumar@gmail.com</p>
               </div>
               <Button 
                 variant="ghost" 
                 size="sm" 
                 className="ml-auto"
                 onClick={() => {
-                  navigator.clipboard.writeText("hello@pixperk.dev");
+                  navigator.clipboard.writeText("mishrayashaswikumar@gmail.com");
                   addToHistory('success', 'Email copied to clipboard!');
                 }}
               >
