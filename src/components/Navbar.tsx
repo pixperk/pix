@@ -153,55 +153,55 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
-      
-      {/* Mobile menu */}
-      <div 
+        
+        {/* Mobile menu */}
+        <div 
         className={cn(
-          "md:hidden absolute w-full glass backdrop-blur-lg shadow-lg border-t border-border transition-all duration-300 z-50",
+          "md:hidden fixed top-16 sm:top-18 md:top-20 left-0 right-0 w-full bg-background backdrop-blur-lg shadow-lg border-t border-border transition-all duration-300 z-50",
           isMobileMenuOpen 
-            ? "translate-y-0 opacity-100 pointer-events-auto" 
-            : "-translate-y-full opacity-0 pointer-events-none"
+        ? "translate-y-0 opacity-100 pointer-events-auto" 
+        : "-translate-y-full opacity-0 pointer-events-none"
         )}
-      >
+        >
         <div className="container mx-auto px-4 py-4 space-y-1">
           {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={cn(
-                "block py-2.5 text-base sm:text-lg font-serif transition-colors relative group",
-                location.pathname === item.href
-                  ? "text-primary font-medium"
-                  : "text-foreground/80 hover:text-primary"
-              )}
-            >
-              {item.name}
-              <span className={cn(
-                "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300",
-                location.pathname === item.href ? "w-1/4" : "group-hover:w-1/4"
-              )}></span>
-            </Link>
+        <Link
+          key={item.name}
+          to={item.href}
+          className={cn(
+          "block py-2.5 text-base sm:text-lg font-serif transition-colors relative group",
+          location.pathname === item.href
+          ? "text-primary font-medium"
+          : "text-foreground/80 hover:text-primary"
+          )}
+        >
+          {item.name}
+          <span className={cn(
+          "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300",
+          location.pathname === item.href ? "w-1/4" : "group-hover:w-1/4"
+          )}></span>
+        </Link>
           ))}
           
           {/* CLI link in mobile menu */}
           <Link
-            to="/cli"
-            className={cn(
-              "flex items-center gap-2 py-2.5 text-base sm:text-lg font-serif",
-              "text-primary font-medium"
-            )}
+        to="/cli"
+        className={cn(
+          "flex items-center gap-2 py-2.5 text-base sm:text-lg font-serif",
+          "text-primary font-medium"
+        )}
           >
-            <Terminal size={16} />
-            CLI
-            <span className="ml-1 inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium bg-primary/20 text-primary">
-              New
-            </span>
+        <Terminal size={16} />
+        CLI
+        <span className="ml-1 inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium bg-primary/20 text-primary">
+          New
+        </span>
           </Link>
         </div>
+        </div>
       </div>
-    </nav>
-  );
-};
+      </nav>
+      );
+    };
 
-export default Navbar;
+    export default Navbar;
