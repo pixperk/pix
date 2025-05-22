@@ -189,6 +189,18 @@ const Blog = () => {
                             <ExternalLink className="h-3 w-3" />
                           </a>
                         )}
+                        {post.externalLinks.hashnode && (
+                          <a
+                            href={post.externalLinks.hashnode}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-xs px-2 py-1 rounded-md bg-secondary/50 hover:bg-secondary transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <span>Hashnode</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
                       </div>
                     )}
                   </div>

@@ -270,6 +270,19 @@ const BlogPost = () => {
                     </a>
                   </Button>
                 )}
+                {post.externalLinks?.hashnode && (
+                  <Button size="sm" variant="outline" className="dark:hover:bg-[#5B21B6]/10 hover:bg-[#5B21B6]/20" asChild>
+                    <a
+                      href={post.externalLinks.hashnode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 group"
+                    >
+                      Read on Hashnode
+                      <ExternalLink className="h-3 w-3 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  </Button>
+                )}
               </div>
             </div>
           </header>

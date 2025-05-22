@@ -1,3 +1,4 @@
+import { auth_blog } from "./blogs/auth";
 import { goConcurrency } from "./blogs/go-concurrency";
 import { goGrpc } from "./blogs/go-grpc";
 import { pointers } from "./blogs/pointers";
@@ -13,10 +14,12 @@ export interface BlogPost {
   externalLinks?: {
     medium?: string;
     devTo?: string;
+    hashnode?: string;
   };
 }
 
 export const blogPosts: BlogPost[] = [
+  auth_blog,
   goConcurrency,
   goGrpc,
   pointers
